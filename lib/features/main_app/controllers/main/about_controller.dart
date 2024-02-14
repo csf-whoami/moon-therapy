@@ -5,9 +5,8 @@ import '../../Screens/desktop/about.dart' as desktop;
 import '../../Screens/mobile/about.dart' as mobile;
 import '../../Screens/tablet/about.dart' as tablet;
 
-
 class AboutController extends StatefulController {
-  final String _title = 'About Page';
+  final String _title = 'Quản lý trị liệu';
   const AboutController({Key? key}) : super(key: key);
 
   @override

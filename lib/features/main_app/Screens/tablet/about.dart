@@ -20,7 +20,7 @@ class _AboutState extends State<About> {
   void initState() {
     super.initState();
     _name = TextEditingController(text: 'Guest');
-    display = 'About Page';
+    display = 'Quản lý trị liệu';
   }
 
   @override
