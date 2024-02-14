@@ -6,7 +6,10 @@ class AppCache {
 
   void doLogin(String username, String password) {
     udata = {'user': username, 'pass': password};
+    // TODO: Authenticate method.
+    // if (username == '0366921567') {
     Cache.saveData('auth_data', jsonEncode(udata));
+    // }
   }
 
   Future<Map<String, String>> auth() async {

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
-import '../../widgets/auth_button.dart';
+// import '../../widgets/auth_button.dart';
 import '../../widgets/widget_functions.dart';
 
 class LoginMobileScreen extends StatefulWidget {
@@ -96,28 +96,28 @@ class _LoginMobileScreenState extends State<LoginMobileScreen> {
                 thickness: 3,
               ),
 
-              // Social Login Buttons
-              AuthButton(
-                label: 'Login by Facebook',
-                onPressed: () {},
-                backgroundColor: const Color.fromARGB(255, 7, 108, 191),
-                textColor: Colors.white,
-                paddingValue: 15,
-              ),
-              AuthButton(
-                label: 'Login by Google',
-                onPressed: () {},
-                backgroundColor: const Color.fromARGB(255, 235, 53, 17),
-                textColor: Colors.white,
-                paddingValue: 15,
-              ),
-              AuthButton(
-                label: 'Login by LinkedIn',
-                onPressed: () {},
-                backgroundColor: const Color.fromARGB(255, 17, 126, 235),
-                textColor: Colors.white,
-                paddingValue: 15,
-              ),
+              // TODO: Social Login Buttons
+              // AuthButton(
+              //   label: 'Login by Facebook',
+              //   onPressed: () {},
+              //   backgroundColor: const Color.fromARGB(255, 7, 108, 191),
+              //   textColor: Colors.white,
+              //   paddingValue: 15,
+              // ),
+              // AuthButton(
+              //   label: 'Login by Google',
+              //   onPressed: () {},
+              //   backgroundColor: const Color.fromARGB(255, 235, 53, 17),
+              //   textColor: Colors.white,
+              //   paddingValue: 15,
+              // ),
+              // AuthButton(
+              //   label: 'Login by LinkedIn',
+              //   onPressed: () {},
+              //   backgroundColor: const Color.fromARGB(255, 17, 126, 235),
+              //   textColor: Colors.white,
+              //   paddingValue: 15,
+              // ),
             ],
           ),
         ),
