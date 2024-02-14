@@ -34,7 +34,7 @@ class _AboutState extends State<About> {
         actions: actionsMenu(context),
       ),
       body: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Column(
           children: [
             Material(
@@ -60,7 +60,7 @@ class _AboutState extends State<About> {
                                 Border.all(color: Colors.pinkAccent, width: 1)),
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('Chat'),
+                          child: Text('Yêu cầu'),
                         ),
                       ),
                     ),
@@ -73,20 +73,7 @@ class _AboutState extends State<About> {
                                 Border.all(color: Colors.pinkAccent, width: 1)),
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('Chat'),
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Container(
-                        height: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border:
-                                Border.all(color: Colors.pinkAccent, width: 1)),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text('Chat'),
+                          child: Text('Danh sách trị liệu'),
                         ),
                       ),
                     )
@@ -105,8 +92,8 @@ class _AboutState extends State<About> {
                     itemBuilder: (context, index) {
                       return ListTile(
                           onTap: () {},
-                          title: Text("Tab list ${index}"),
-                          subtitle: Text("Tabbar UI"),
+                          title: Text("Yêu cầu trị liệu ${index + 1}"),
+                          subtitle: Text("Tình trạng hiện tại"),
                           trailing: Icon(Icons.ice_skating));
                     }),
                 ListView.separated(
@@ -117,22 +104,10 @@ class _AboutState extends State<About> {
                     itemBuilder: (context, index) {
                       return ListTile(
                           onTap: () {},
-                          title: Text("Tab2 list ${index}"),
-                          subtitle: Text("Tabbar2 UI"),
+                          title: Text("Lần trị liệu ${index + 1}"),
+                          subtitle: Text("Tình trạng điều trị"),
                           trailing: Icon(Icons.arrow_circle_right));
-                    }),
-                ListView.separated(
-                    padding: EdgeInsets.all(10),
-                    itemCount: 20,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                          onTap: () {},
-                          title: Text("Tab3 list ${index}"),
-                          subtitle: Text("Tabbar3 UI"),
-                          trailing: Icon(Icons.arrow_circle_right));
-                    }),
+                    })
               ],
             ))
           ],
