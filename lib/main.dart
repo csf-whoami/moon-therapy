@@ -8,7 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Provider.debugCheckInvalidValueType = null;
 
-  await dotenv.load(fileName: ".env.sample");
+  // Load Environment file.
+  // await dotenv.load(fileName: ".env.sample");
   runApp(MultiProvider(
     providers: appProviders,
     child: const CleanApp(),

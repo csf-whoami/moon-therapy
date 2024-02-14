@@ -4,7 +4,8 @@ import '../features/features.dart';
 
 class ApiEndpoint {
   // News Server
-  static const rapidUrl = 'https://free-news.p.rapidapi.com';
+  static const rapidUrl = 'https://google.com.vn';
+  // static const rapidUrl = 'https://free-news.p.rapidapi.com';
   static const news = '$rapidUrl/v1/search';
 
   // Server Links
