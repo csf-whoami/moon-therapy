@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
-import '../../Screens/desktop/about.dart' as desktop;
-import '../../Screens/mobile/about.dart' as mobile;
-import '../../Screens/tablet/about.dart' as tablet;
+import '../../screens/desktop/about.dart' as desktop;
+import '../../screens/mobile/therapy.dart' as mobile;
+import '../../screens/tablet/about.dart' as tablet;
 
 class AboutController extends StatefulController {
   final String _title = 'Quản lý trị liệu';
