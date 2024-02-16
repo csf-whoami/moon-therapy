@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
 
-import './tabs/firstScreen.dart';
-import './tabs/secondScreen.dart';
-
 class About extends StatefulWidget {
   final String? title;
   const About({Key? key, this.title}) : super(key: key);
@@ -103,7 +100,9 @@ class _AboutState extends State<About> {
                         const Divider(),
                     itemBuilder: (context, index) {
                       return ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            Nav.to(context, '/profile');
+                          },
                           title: Text("Lần trị liệu ${index + 1}"),
                           subtitle: Text("Tình trạng điều trị"),
                           trailing: Icon(Icons.arrow_circle_right));
