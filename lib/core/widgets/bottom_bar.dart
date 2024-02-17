@@ -18,7 +18,7 @@ class BottomBar extends StatelessWidget {
           ButtonData(icon: Icons.home, label: 'Home', link: '/'),
           ButtonData(icon: Icons.people, label: 'Trị liệu', link: '/therapy'),
           ButtonData(
-              icon: Icons.contact_mail, label: 'Tạo lịch', link: '/contact'),
+              icon: Icons.contact_mail, label: 'Tạo lịch', link: '/order'),
           ButtonData(icon: Icons.newspaper, label: 'Lịch sử', link: '/news'),
           ButtonData(icon: Icons.ac_unit, label: 'Thông báo', link: '/feature'),
         ];

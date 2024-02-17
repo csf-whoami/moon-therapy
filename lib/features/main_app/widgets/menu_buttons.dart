@@ -32,7 +32,7 @@ class MenuButtons extends StatelessWidget {
         Nav.to(context, '/about');
         break;
       case 'Contact':
-        Nav.to(context, '/contact');
+        Nav.to(context, '/order');
         break;
       case 'News':
         Nav.to(context, '/news');

@@ -58,7 +58,7 @@ class _BottomBarState extends State<BottomBar> {
         Nav.to(context, '/about');
         break;
       case 2:
-        Nav.to(context, '/contact');
+        Nav.to(context, '/order');
         break;
       case 3:
         Nav.to(context, '/news');

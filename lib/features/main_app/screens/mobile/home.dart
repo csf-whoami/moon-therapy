@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/core/theme.dart';
-import 'package:moon/core/widgets/myButton.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../config/config.dart';
@@ -75,12 +74,13 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          MyButton(
-              label: "+ Add Task",
-              onTap: () => {
-                    // Get.to(AddTaskPage())
-                    Nav.to(context, '/profile')
-                  })
+          // TODO: Button Create task.
+          // MyButton(
+          //     label: "+ Add Task",
+          //     onTap: () => {
+          //           // Get.to(AddTaskPage())
+          //           Nav.to(context, '/profile')
+          //         })
         ],
       ),
     );
