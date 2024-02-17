@@ -29,7 +29,7 @@ class Contact extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Nav.to(context, '/about');
+                Nav.to(context, '/therapy');
               },
               child: const Text('Goto About Page'),
             ),

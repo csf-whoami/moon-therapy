@@ -30,6 +30,12 @@ class _DayNightSwitchState extends State<DayNightSwitch> {
             dayAndNight = val;
             tm.setThemeMode(dayAndNight);
           });
+          // TODO: Notification.
+          // notifyHelper.displayNotification(
+          //     title: "theme change",
+          //     body: dayAndNight ? "Activated Light theme." : "Activated Night theme."
+          // )
+          // notifyHelper.scheduleNotification();
         });
   }
 }

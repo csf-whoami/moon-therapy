@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
 
-class About extends StatefulWidget {
+class Therapy extends StatefulWidget {
   final String? title;
-  const About({Key? key, this.title}) : super(key: key);
+  const Therapy({Key? key, this.title}) : super(key: key);
 
   @override
-  State<About> createState() => _AboutState();
+  State<Therapy> createState() => _TherapyState();
 }
 
-class _AboutState extends State<About> {
+class _TherapyState extends State<Therapy> {
   late TextEditingController _name;
   late String display;
 
@@ -23,7 +23,7 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    // var theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(

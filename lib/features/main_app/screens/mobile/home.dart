@@ -1,4 +1,9 @@
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:moon/core/theme.dart';
+import 'package:moon/core/widgets/myButton.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../config/config.dart';
@@ -15,56 +20,95 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool dayAndNight = false;
 
+  DateTime _selectedDate = DateTime.now();
+  var notifyHelper;
+
   @override
   void initState() {
     super.initState();
     var tm = context.read<ThemeProvider>();
     dayAndNight = tm.isDarkMode;
+
+    // TODO: Setting notification
+    // notifyHelper = NotifyHelper();
+    // notifyHelper.initializeNotification();
+    // notifyHelper.requestIOSPermissions();
   }
 
   @override
   Widget build(BuildContext context) {
-    var tm = context.read<ThemeProvider>();
+    // var tm = context.read<ThemeProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Mobile: ${widget.title!}"),
         actions: actionsMenu(context),
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text('This is the first page'),
-            ElevatedButton(
-              onPressed: () {
-                Nav.to(context, '/about');
-              },
-              child: const Text('Goto About Page'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  dayAndNight = false;
-                  tm.setThemeMode(dayAndNight);
-                });
-              },
-              child: const Text("Day"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  dayAndNight = true;
-                  tm.setThemeMode(dayAndNight);
-                });
-              },
-              child: const Text("Night"),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          _addTaskBar(),
+          _addDateBar(),
+        ],
       ),
       bottomNavigationBar: BottomBar(),
+    );
+  }
+
+  _addTaskBar() {
+    return Container(
+      margin: const EdgeInsets.only(left: 20, right: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  DateFormat.yMMMMd().format(DateTime.now()),
+                  style: subHeadingStyle,
+                ),
+                Text(
+                  "Today",
+                  style: headingStyle,
+                )
+              ],
+            ),
+          ),
+          MyButton(
+              label: "+ Add Task",
+              onTap: () => {
+                    // Get.to(AddTaskPage())
+                    Nav.to(context, '/profile')
+                  })
+        ],
+      ),
+    );
+  }
+
+  _addDateBar() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20, left: 20),
+      child: DatePicker(
+        DateTime.now(),
+        height: 100,
+        width: 80,
+        initialSelectedDate: DateTime.now(),
+        selectionColor: primaryClr,
+        selectedTextColor: Colors.white,
+        dateTextStyle: GoogleFonts.lato(
+            textStyle: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey)),
+        dayTextStyle: GoogleFonts.lato(
+            textStyle: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey)),
+        monthTextStyle: GoogleFonts.lato(
+            textStyle: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
+        onDateChange: (date) {
+          _selectedDate = date;
+        },
+      ),
     );
   }
 }

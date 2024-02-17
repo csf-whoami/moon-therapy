@@ -14,7 +14,7 @@ class ActionButtons extends StatelessWidget {
     buttonDatas = buttonDatas ??
         [
           ButtonData(icon: Icons.home, label: 'Home', link: '/'),
-          ButtonData(icon: Icons.people, label: 'About', link: '/about'),
+          ButtonData(icon: Icons.people, label: 'Trị liệu', link: '/therapy'),
           ButtonData(icon: Icons.logout, label: 'Logout', link: '/logout'),
         ];
   }

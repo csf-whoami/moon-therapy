@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../utils/button_data.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/app_theme.dart';
 import '../classes/route_manager.dart';
 import '../utils/bottom_util.dart';
+import '../utils/button_data.dart';
 
 // ignore: must_be_immutable
 class BottomBar extends StatelessWidget {
@@ -16,7 +16,7 @@ class BottomBar extends StatelessWidget {
     buttonDatas = buttonDatas ??
         [
           ButtonData(icon: Icons.home, label: 'Home', link: '/'),
-          ButtonData(icon: Icons.people, label: 'Trị liệu', link: '/about'),
+          ButtonData(icon: Icons.people, label: 'Trị liệu', link: '/therapy'),
           ButtonData(
               icon: Icons.contact_mail, label: 'Tạo lịch', link: '/contact'),
           ButtonData(icon: Icons.newspaper, label: 'Lịch sử', link: '/news'),

@@ -5,15 +5,15 @@ import '../../screens/desktop/about.dart' as desktop;
 import '../../screens/mobile/therapy.dart' as mobile;
 import '../../screens/tablet/about.dart' as tablet;
 
-class AboutController extends StatefulController {
+class TherapyController extends StatefulController {
   final String _title = 'Quản lý trị liệu';
-  const AboutController({Key? key}) : super(key: key);
+  const TherapyController({Key? key}) : super(key: key);
 
   @override
-  State<AboutController> createState() => _AboutControllerState();
+  State<TherapyController> createState() => _TherapyControllerState();
 }
 
-class _AboutControllerState extends ControllerState<AboutController> {
+class _TherapyControllerState extends ControllerState<TherapyController> {
   @override
   bool get auth => true;
 
@@ -21,7 +21,7 @@ class _AboutControllerState extends ControllerState<AboutController> {
   Display view(BuildContext context) {
     return Display(
       title: widget._title,
-      mobile: mobile.About(
+      mobile: mobile.Therapy(
         title: widget._title,
       ),
       tabletLandscape: tablet.About(title: widget._title),
