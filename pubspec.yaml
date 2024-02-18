@@ -26,6 +26,8 @@ dependencies:
   google_fonts:
   date_picker_timeline:
   sqflite:
+  # fix bug: databaseFactory not initialized
+  sqflite_common_ffi:
 
 dev_dependencies:
   build_runner: ^2.4.6

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/core.dart';
+import 'package:moon/core/core.dart';
 
 class Therapy extends StatefulWidget {
   final String? title;
@@ -11,13 +10,13 @@ class Therapy extends StatefulWidget {
 }
 
 class _TherapyState extends State<Therapy> {
-  late TextEditingController _name;
+  // late TextEditingController _name;
   late String display;
 
   @override
   void initState() {
     super.initState();
-    _name = TextEditingController(text: 'Guest');
+    // _name = TextEditingController(text: 'Guest');
     display = 'Quản lý trị liệu';
   }
 

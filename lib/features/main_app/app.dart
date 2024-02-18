@@ -11,7 +11,7 @@ class App extends RouteManager {
   App() {
     addRoute(App.home, (context) => const HomeController());
     addRoute(App.therapy, (context) => const TherapyController());
-    addRoute(App.order, (context) => const CreateOrderController());
+    addRoute(App.order, (context) => const OrderController());
     addRoute(App.news, (context) => const NewsController());
   }
 }

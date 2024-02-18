@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/core/theme.dart';
 import 'package:moon/core/widgets/input_field.dart';
-import 'package:moon/core/widgets/myButton.dart';
+import 'package:moon/features/main_app/models/main/order_controller.dart';
+// import 'package:moon/features/main_app/models/main/order_model.dart';
+import 'package:moon/features/main_app/widgets/myButton.dart';
 
 import '../../../../core/core.dart';
 
@@ -17,6 +19,11 @@ class Order extends StatefulWidget {
 }
 
 class _orderState extends State<Order> {
+  final CreateOrderController _taskController =
+      Get.put(CreateOrderController());
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+
   DateTime _selectedDate = DateTime.now();
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
@@ -29,8 +36,11 @@ class _orderState extends State<Order> {
 
   int _selectedColor = 0;
 
-  TextEditingController? _titleController;
-  TextEditingController? _noteController;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,8 +178,19 @@ class _orderState extends State<Order> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _colorPallete(),
-                  MyButton(label: "Create task", onTap: () => _validateDate())
+                  _colorPallet(),
+                  MyButton(
+                    onPressed: () {
+                      debugPrint('Login Validate');
+                      _validateDate();
+                    },
+                    label: 'Login Now',
+                    stretch: true,
+                  )
+                  // MyButton(
+                  //     label: "Create task",
+                  //     onPressed: () => _validateDate()
+                  // )
                 ],
               )
             ],
@@ -182,7 +203,9 @@ class _orderState extends State<Order> {
 
   _validateDate() {
     if (_titleController!.text.isNotEmpty && _noteController!.text.isNotEmpty) {
+      print('Tap in here. And insert to DB');
       // Add to database.
+      _addTaskToDB();
       Get.back();
     } else if (_titleController!.text.isEmpty ||
         _noteController!.text.isEmpty) {
@@ -239,7 +262,7 @@ class _orderState extends State<Order> {
         ));
   }
 
-  _colorPallete() {
+  _colorPallet() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -282,5 +305,21 @@ class _orderState extends State<Order> {
         )
       ],
     );
+  }
+
+  _addTaskToDB() async {
+    // Set data to database.
+    // var value = await _taskController.addTask(
+    //     task: OrderResponseModel(
+    //         note: _noteController!.text,
+    //         title: _titleController!.text,
+    //         date: DateFormat.yMd().format(_selectedDate),
+    //         startTime: _startTime,
+    //         endTime: _endTime,
+    //         remind: _selectedRemind,
+    //         repeat: _selectedRepeat,
+    //         color: _selectedColor,
+    //         isCompleted: 0));
+    // print("My ID is $value");
   }
 }

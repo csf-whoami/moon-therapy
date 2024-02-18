@@ -3,6 +3,10 @@ import '../features/features.dart';
 /// In this file we will be writing all API Endpoints using this application
 
 class ApiEndpoint {
+  // API fetch orders.
+  static const events =
+      "https://crudcrud.com/api/ff2bd295c2bf4ee590621af0e194e481/events";
+
   // News Server
   static const rapidUrl = 'https://google.com.vn';
   // static const rapidUrl = 'https://free-news.p.rapidapi.com';

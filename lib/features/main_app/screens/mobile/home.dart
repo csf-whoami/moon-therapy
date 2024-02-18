@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../../../config/config.dart';
 import '../../../../core/core.dart';
+import '../../providers/therapy_provider.dart';
+// import '../../providers/news_provider.dart';
 
 class Home extends StatefulWidget {
   final String? title;
@@ -17,6 +19,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final TextEditingController _controller =
+      TextEditingController(text: 'Software Development');
+
   bool dayAndNight = false;
 
   DateTime _selectedDate = DateTime.now();
@@ -24,6 +29,11 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    OrderProvider np = Provider.of<OrderProvider>(context, listen: false);
+    np.getAll();
+    // NewsProvider np = Provider.of<NewsProvider>(context, listen: false);
+    // np.search(_controller.text);
+
     super.initState();
     var tm = context.read<ThemeProvider>();
     dayAndNight = tm.isDarkMode;

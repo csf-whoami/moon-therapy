@@ -6,6 +6,9 @@ import 'config/config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initial DB
+  // await DBHelper.initDb();
+
   Provider.debugCheckInvalidValueType = null;
 
   // Load Environment file.

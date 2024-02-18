@@ -5,9 +5,9 @@ import '../../screens/desktop/contact.dart' as desktop;
 import '../../screens/mobile/order.dart' as mobile;
 import '../../screens/tablet/contact.dart' as tablet;
 
-class CreateOrderController extends StatelessController {
+class OrderController extends StatelessController {
   final String _title = 'Tạo yêu cầu';
-  const CreateOrderController({Key? key}) : super(key: key);
+  const OrderController({Key? key}) : super(key: key);
 
   @override
   bool get auth => false;

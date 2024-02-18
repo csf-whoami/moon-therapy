@@ -1,3 +1,4 @@
+import 'package:moon/features/main_app/providers/therapy_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -18,5 +19,8 @@ List<SingleChildWidget> appProviders = [
   ),
   ChangeNotifierProvider<EnqueryProvider>(
     create: (context) => EnqueryProvider(),
-  )
+  ),
+  ChangeNotifierProvider<OrderProvider>(
+    create: (context) => OrderProvider(),
+  ),
 ];
