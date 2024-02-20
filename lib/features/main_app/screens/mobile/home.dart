@@ -1,13 +1,17 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:moon/core/helpers/actions_helper.dart';
 import 'package:moon/core/theme.dart';
+import 'package:moon/features/main_app/providers/therapy_provider.dart';
+import 'package:moon/features/main_app/screens/mobile/order.dart';
+import 'package:moon/features/main_app/widgets/widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../config/config.dart';
-import '../../../../core/core.dart';
-import '../../providers/therapy_provider.dart';
+// import '../../../../core/core.dart';
+// import '../../providers/therapy_provider.dart';
 // import '../../providers/news_provider.dart';
 
 class Home extends StatefulWidget {
@@ -19,24 +23,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final TextEditingController _controller =
-      TextEditingController(text: 'Software Development');
-
   bool dayAndNight = false;
-
   DateTime _selectedDate = DateTime.now();
+  final _taskController = Get.put(Order());
+  OrderProvider? np;
+
   var notifyHelper;
 
   @override
   void initState() {
-    OrderProvider np = Provider.of<OrderProvider>(context, listen: false);
-    np.getAll();
-    // NewsProvider np = Provider.of<NewsProvider>(context, listen: false);
-    // np.search(_controller.text);
+    np = Provider.of<OrderProvider>(context, listen: false);
+    np!.getAll();
 
     super.initState();
-    var tm = context.read<ThemeProvider>();
-    dayAndNight = tm.isDarkMode;
+    // var tm = context.read<ThemeProvider>();
+    // dayAndNight = tm.isDarkMode;
 
     // TODO: Setting notification
     // notifyHelper = NotifyHelper();
@@ -53,10 +54,7 @@ class _HomeState extends State<Home> {
         actions: actionsMenu(context),
       ),
       body: Column(
-        children: [
-          _addTaskBar(),
-          _addDateBar(),
-        ],
+        children: [_addTaskBar(), _addDateBar(), _showTask()],
       ),
       bottomNavigationBar: BottomBar(),
     );
@@ -87,10 +85,12 @@ class _HomeState extends State<Home> {
           // TODO: Button Create task.
           // MyButton(
           //     label: "+ Add Task",
-          //     onTap: () => {
-          //           // Get.to(AddTaskPage())
-          //           Nav.to(context, '/profile')
-          //         })
+          //     onPressed: () {
+          //       // await Get.to(() => Order());
+          //       // Nav.to(context, '/profile')
+          //       Get.to(() => Order());
+          //       _showTask();
+          //     })
         ],
       ),
     );
@@ -120,5 +120,21 @@ class _HomeState extends State<Home> {
         },
       ),
     );
+  }
+
+  _showTask() {
+    return Expanded(child: Obx(() {
+      return ListView.builder(
+          itemCount: np!.orders?.length,
+          itemBuilder: (_, context) {
+            print(np!.orders?.length);
+            return Container(
+              width: 100,
+              height: 50,
+              color: Colors.green,
+              margin: const EdgeInsets.only(bottom: 10),
+            );
+          });
+    }));
   }
 }
