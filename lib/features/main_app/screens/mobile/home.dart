@@ -1,18 +1,12 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/core/helpers/actions_helper.dart';
 import 'package:moon/core/theme.dart';
 import 'package:moon/features/main_app/providers/therapy_provider.dart';
-import 'package:moon/features/main_app/screens/mobile/order.dart';
 import 'package:moon/features/main_app/widgets/widget.dart';
 import 'package:provider/provider.dart';
-
-// import '../../../../core/core.dart';
-// import '../../providers/therapy_provider.dart';
-// import '../../providers/news_provider.dart';
 
 class Home extends StatefulWidget {
   final String? title;
@@ -24,8 +18,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool dayAndNight = false;
-  DateTime _selectedDate = DateTime.now();
-  final _taskController = Get.put(Order());
+  // DateTime _selectedDate = DateTime.now();
+  // final _taskController = Get.put(Order());
   OrderProvider? np;
 
   var notifyHelper;
@@ -47,14 +41,17 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // var tm = context.read<ThemeProvider>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Mobile: ${widget.title!}"),
         actions: actionsMenu(context),
       ),
       body: Column(
-        children: [_addTaskBar(), _addDateBar(), _showTask()],
+        children: [
+          _addTaskBar(),
+          _addDateBar(),
+          _showTask(),
+        ],
       ),
       bottomNavigationBar: BottomBar(),
     );
@@ -116,25 +113,33 @@ class _HomeState extends State<Home> {
             textStyle: TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
         onDateChange: (date) {
-          _selectedDate = date;
+          np!.getAll();
+          // _selectedDate = date;
         },
       ),
     );
   }
 
-  _showTask() {
-    return Expanded(child: Obx(() {
-      return ListView.builder(
-          itemCount: np!.orders?.length,
-          itemBuilder: (_, context) {
-            print(np!.orders?.length);
-            return Container(
-              width: 100,
-              height: 50,
-              color: Colors.green,
-              margin: const EdgeInsets.only(bottom: 10),
+  Expanded _showTask() {
+    return Expanded(
+      child: Consumer<OrderProvider>(
+        builder: (_, np, __) {
+          if (np.isLoading == false) {
+            return const Center(
+              child: Text('News data loading....'),
             );
-          });
-    }));
+          } else if (np.orders != null) {
+            var _orders = np.orders!;
+            return ListView.builder(
+                itemCount: _orders.length,
+                itemBuilder: (context, index) => Text('test'));
+          } else {
+            return const Center(
+              child: Text('No news data fetched'),
+            );
+          }
+        },
+      ),
+    );
   }
 }
