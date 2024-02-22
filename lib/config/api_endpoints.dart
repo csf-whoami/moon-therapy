@@ -5,7 +5,7 @@ import '../features/features.dart';
 class ApiEndpoint {
   // API fetch orders.
   static const events =
-      "https://crudcrud.com/api/563b1585883b487b8ed341742e19c9cd/events";
+      "https://crudcrud.com/api/f8ef1a69b82e4743bc18530e3185e53e/events";
 
   // News Server
   static const rapidUrl = 'https://google.com.vn';

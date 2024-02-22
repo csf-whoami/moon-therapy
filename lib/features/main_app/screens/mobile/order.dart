@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:moon/core/core.dart';
 import 'package:moon/core/theme.dart';
 import 'package:moon/core/widgets/input_field.dart';
-import 'package:moon/features/main_app/models/main/order_controller.dart';
-// import 'package:moon/features/main_app/models/main/order_model.dart';
 import 'package:moon/features/main_app/widgets/myButton.dart';
-
-import '../../../../core/core.dart';
 
 // ignore: must_be_immutable
 class Order extends StatefulWidget {
@@ -19,8 +16,8 @@ class Order extends StatefulWidget {
 }
 
 class _orderState extends State<Order> {
-  final CreateOrderController _taskController =
-      Get.put(CreateOrderController());
+  // final CreateOrderController _taskController =
+  //     Get.put(CreateOrderController());
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -44,7 +41,6 @@ class _orderState extends State<Order> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
         // title: Text(title!),
         actions: actionsMenu(context),

@@ -25,9 +25,7 @@ dependencies:
   intl:
   google_fonts:
   date_picker_timeline:
-  sqflite:
-  # fix bug: databaseFactory not initialized
-  sqflite_common_ffi:
+  flutter_staggered_animations:
 
 dev_dependencies:
   build_runner: ^2.4.6

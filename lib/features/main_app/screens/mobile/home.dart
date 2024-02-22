@@ -1,10 +1,14 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/core/helpers/actions_helper.dart';
 import 'package:moon/core/theme.dart';
+import 'package:moon/features/lead_mod/models/models.dart';
 import 'package:moon/features/main_app/providers/therapy_provider.dart';
+import 'package:moon/features/main_app/screens/mobile/task_title.dart';
 import 'package:moon/features/main_app/widgets/widget.dart';
 import 'package:provider/provider.dart';
 
@@ -131,14 +135,95 @@ class _HomeState extends State<Home> {
           } else if (np.orders != null) {
             var _orders = np.orders!;
             return ListView.builder(
-                itemCount: _orders.length,
-                itemBuilder: (context, index) => Text('test'));
+              itemCount: _orders.length,
+              itemBuilder: (_, index) {
+                return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _showBottomSheet(_orders[index]);
+                              },
+                              child: TaskTile(_orders[index]),
+                            )
+                          ],
+                        ),
+                      ),
+                    ));
+              },
+            );
           } else {
             return const Center(
               child: Text('No news data fetched'),
             );
           }
         },
+      ),
+    );
+  }
+
+  // Show popup at button.
+  _showBottomSheet(OrderDataResponse task) {
+    // Show button slide.
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => Container(
+              padding: const EdgeInsets.only(top: 4),
+              height: task.isCompleted == 1
+                  ? MediaQuery.of(context).size.height * 0.24
+                  : MediaQuery.of(context).size.height * 0.32,
+              // color: Get.isDarkMode ? darkGreyClr : Colors.white,
+              child: Column(
+                children: [
+                  Container(
+                    height: 6,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Get.isDarkMode
+                            ? Colors.grey[600]
+                            : Colors.grey[300]),
+                  ),
+                  Spacer(),
+                  task.isCompleted == 1
+                      ? Container()
+                      : _bottomSheetButton(
+                          label: "Task completed",
+                          onTap: () {
+                            Get.back();
+                            // print("Tab in here.");
+                          },
+                          clr: primaryClr,
+                          context: context)
+                ],
+              ),
+            )
+        // const FlutterLogo(size: 400),
+        );
+  }
+
+  _bottomSheetButton(
+      {required String label,
+      required Function onTap,
+      required Color clr,
+      bool isClode = false,
+      required BuildContext context}) {
+    return GestureDetector(
+      onTap: () {
+        Get.back();
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        height: 55,
+        width: MediaQuery.of(context).size.width * 0.9,
+        color: isClode == true ? Colors.red : clr,
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: 2, color: isClode == true ? Colors.red : Colors.yellow),
+            borderRadius: BorderRadius.circular(20)),
       ),
     );
   }
