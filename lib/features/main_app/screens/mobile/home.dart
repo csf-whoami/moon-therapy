@@ -22,8 +22,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool dayAndNight = false;
-  // DateTime _selectedDate = DateTime.now();
-  // final _taskController = Get.put(Order());
   OrderProvider? np;
 
   var notifyHelper;
@@ -188,16 +186,29 @@ class _HomeState extends State<Home> {
                             : Colors.grey[300]),
                   ),
                   Spacer(),
-                  task.isCompleted == 1
+                  task.isCompleted == 2
                       ? Container()
                       : _bottomSheetButton(
                           label: "Task completed",
                           onTap: () {
-                            Get.back();
-                            // print("Tab in here.");
+                            print("Tab in Task completed.");
+                            Navigator.pop(context);
                           },
                           clr: primaryClr,
-                          context: context)
+                          context: context,
+                          isClose: true),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _bottomSheetButton(
+                      label: "Delete Task",
+                      onTap: () {
+                        print("Tab in Delete Task.");
+                        Navigator.pop(context);
+                      },
+                      clr: Colors.red[300]!,
+                      context: context,
+                      isClose: true),
                 ],
               ),
             )
@@ -207,23 +218,35 @@ class _HomeState extends State<Home> {
 
   _bottomSheetButton(
       {required String label,
-      required Function onTap,
+      required VoidCallback onTap,
       required Color clr,
-      bool isClode = false,
+      bool isClose = false,
       required BuildContext context}) {
     return GestureDetector(
-      onTap: () {
-        Get.back();
-      },
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         height: 55,
-        width: MediaQuery.of(context).size.width * 0.9,
-        color: isClode == true ? Colors.red : clr,
+        width: MediaQuery.of(context).size.width,
+        // color: isClose == true ? Colors.red : Colors.yellow,
         decoration: BoxDecoration(
-            border: Border.all(
-                width: 2, color: isClode == true ? Colors.red : Colors.yellow),
-            borderRadius: BorderRadius.circular(20)),
+          border: Border.all(
+            width: 2,
+            color: isClose == true ? Colors.red : Colors.yellow,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          color: isClose == true ? Colors.red : Colors.yellow,
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: isClose
+                ? titleStyle
+                : titleStyle.copyWith(
+                    color: Colors.red,
+                  ),
+          ),
+        ),
       ),
     );
   }

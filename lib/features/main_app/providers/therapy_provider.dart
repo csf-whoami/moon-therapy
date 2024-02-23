@@ -32,16 +32,4 @@ class OrderProvider extends ChangeNotifier {
     }
     return null;
   }
-
-  //
-  // void fetchOrderData() async {
-  //   Future.microtask(() async {
-  //     OrderService es = OrderService();
-  //     List<OrderDataResponse>? data = await es.getAll();
-  //     print("Total data: " + data!.length.toString());
-  //     _orders = data!;
-  //     isLoaded = true;
-  //     notifyListeners();
-  //   });
-  // }
 }
