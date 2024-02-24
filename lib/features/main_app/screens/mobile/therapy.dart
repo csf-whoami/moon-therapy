@@ -39,21 +39,18 @@ class _TherapyState extends State<Therapy> {
                 color: Colors.white,
                 child: TabBar(
                   physics: const ClampingScrollPhysics(),
-                  padding:
-                      EdgeInsets.only(left: 10, bottom: 10, right: 10, top: 10),
+                  padding: EdgeInsets.only(left: 10, bottom: 10, right: 10, top: 10),
                   unselectedLabelColor: Colors.pink,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.pinkAccent),
+                      borderRadius: BorderRadius.circular(30), color: Colors.pinkAccent),
                   tabs: [
                     Tab(
                       child: Container(
                         height: 80,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            border:
-                                Border.all(color: Colors.pinkAccent, width: 1)),
+                            border: Border.all(color: Colors.pinkAccent, width: 1)),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text('Yêu cầu'),
@@ -65,8 +62,7 @@ class _TherapyState extends State<Therapy> {
                         height: 80,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            border:
-                                Border.all(color: Colors.pinkAccent, width: 1)),
+                            border: Border.all(color: Colors.pinkAccent, width: 1)),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text('Danh sách trị liệu'),
@@ -83,8 +79,7 @@ class _TherapyState extends State<Therapy> {
                 ListView.separated(
                     padding: EdgeInsets.all(10),
                     itemCount: 20,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
+                    separatorBuilder: (BuildContext context, int index) => const Divider(),
                     itemBuilder: (context, index) {
                       return ListTile(
                           onTap: () {},
@@ -95,8 +90,7 @@ class _TherapyState extends State<Therapy> {
                 ListView.separated(
                     padding: EdgeInsets.all(10),
                     itemCount: 20,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
+                    separatorBuilder: (BuildContext context, int index) => const Divider(),
                     itemBuilder: (context, index) {
                       return ListTile(
                           onTap: () {

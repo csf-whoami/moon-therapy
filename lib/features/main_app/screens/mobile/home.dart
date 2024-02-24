@@ -24,21 +24,12 @@ class _HomeState extends State<Home> {
   bool dayAndNight = false;
   OrderProvider? np;
 
-  var notifyHelper;
-
   @override
   void initState() {
     np = Provider.of<OrderProvider>(context, listen: false);
     np!.getAll();
 
     super.initState();
-    // var tm = context.read<ThemeProvider>();
-    // dayAndNight = tm.isDarkMode;
-
-    // TODO: Setting notification
-    // notifyHelper = NotifyHelper();
-    // notifyHelper.initializeNotification();
-    // notifyHelper.requestIOSPermissions();
   }
 
   @override
@@ -55,7 +46,7 @@ class _HomeState extends State<Home> {
           _showTask(),
         ],
       ),
-      bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 
@@ -106,14 +97,11 @@ class _HomeState extends State<Home> {
         selectionColor: primaryClr,
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey)),
+            textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey)),
         dayTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey)),
+            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey)),
         monthTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
+            textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey)),
         onDateChange: (date) {
           np!.getAll();
           // _selectedDate = date;
@@ -181,9 +169,7 @@ class _HomeState extends State<Home> {
                     width: 120,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Get.isDarkMode
-                            ? Colors.grey[600]
-                            : Colors.grey[300]),
+                        color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300]),
                   ),
                   Spacer(),
                   task.isCompleted == 2
@@ -211,9 +197,7 @@ class _HomeState extends State<Home> {
                       isClose: true),
                 ],
               ),
-            )
-        // const FlutterLogo(size: 400),
-        );
+            ));
   }
 
   _bottomSheetButton(

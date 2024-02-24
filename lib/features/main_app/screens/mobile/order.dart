@@ -1,14 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/core/core.dart';
 import 'package:moon/core/theme.dart';
 import 'package:moon/core/widgets/input_field.dart';
 import 'package:moon/features/main_app/widgets/myButton.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 
 // ignore: must_be_immutable
 class Order extends StatefulWidget {
   final String? title;
+
   const Order({Key? key, this.title}) : super(key: key);
 
   @override
@@ -16,8 +21,6 @@ class Order extends StatefulWidget {
 }
 
 class _orderState extends State<Order> {
-  // final CreateOrderController _taskController =
-  //     Get.put(CreateOrderController());
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -32,10 +35,30 @@ class _orderState extends State<Order> {
   List<String> repeatList = ["None", "Daily", "Weekly", "Monthly"];
 
   int _selectedColor = 0;
+  bool isLoading = false;
+  late List<String> autoCompleteData;
+  late TextEditingController _controller;
+
+  Future fetchAutoCompleteData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    // TODO
+    final String stringData = await rootBundle.loadString("assets/data.json");
+    final List<dynamic> json = jsonDecode(stringData);
+    final List<String> jsonStringData = json.cast<String>();
+
+    setState(() {
+      isLoading = false;
+      autoCompleteData = jsonStringData;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    fetchAutoCompleteData();
   }
 
   @override
@@ -56,6 +79,67 @@ class _orderState extends State<Order> {
                 title: "Title",
                 hint: "Enter your title",
                 controller: _titleController,
+              ),
+              Autocomplete(
+                optionsBuilder: (TextEditingValue _textEditingValue) {
+                  if (_textEditingValue.text.isEmpty) {
+                    return const Iterable<String>.empty();
+                  } else {
+                    return autoCompleteData.where((word) =>
+                        word.toLowerCase().contains(_textEditingValue.text.toLowerCase()));
+                  }
+                },
+                // Display style for Results
+                optionsViewBuilder: (context, Function(String) onSelected, options) {
+                  return Material(
+                      elevation: 4,
+                      child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          itemBuilder: (context, index) {
+                            final option = options.elementAt(index);
+                            return ListTile(
+                              title: SubstringHighlight(
+                                text: option.toString(),
+                                term: _controller.text,
+                                textStyleHighlight: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    backgroundColor: Colors.yellow,
+                                    color: primaryClr),
+                              ),
+                              subtitle: Text("This is subtitle"),
+                              onTap: () {
+                                onSelected(option.toString());
+                              },
+                            );
+                          },
+                          separatorBuilder: (context, index) => Divider(),
+                          itemCount: options.length));
+                },
+                onSelected: (selectString) {
+                  print("Select $selectString");
+                }, // TODO: Callback method
+                fieldViewBuilder: // Style view
+                    (context, controller, focusNode, onEditingComplete) {
+                  this._controller = controller;
+
+                  return TextField(
+                    controller: controller,
+                    focusNode: focusNode,
+                    onEditingComplete: onEditingComplete,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey[300]!)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey[300]!)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.grey[300]!)),
+                        hintText: "Tên người yêu cầu...",
+                        prefixIcon: Icon(Icons.account_circle_sharp)),
+                  );
+                },
               ),
               MyInputField(
                 title: "Note",
@@ -151,8 +235,7 @@ class _orderState extends State<Order> {
                   underline: Container(
                     height: 0,
                   ),
-                  items:
-                      repeatList.map<DropdownMenuItem<String>>((String? value) {
+                  items: repeatList.map<DropdownMenuItem<String>>((String? value) {
                     return DropdownMenuItem<String>(
                         value: value.toString(),
                         child: Text(
@@ -203,8 +286,7 @@ class _orderState extends State<Order> {
       // Add to database.
       _addTaskToDB();
       Get.back();
-    } else if (_titleController!.text.isEmpty ||
-        _noteController!.text.isEmpty) {
+    } else if (_titleController!.text.isEmpty || _noteController!.text.isEmpty) {
       Get.snackbar("Required", "All fields are required!!",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.white,
