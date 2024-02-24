@@ -1,61 +1,61 @@
 import 'dart:convert';
 
-class OrderDataResponse {
+class TherapyOrderRequest {
   String? id;
-  String? title;
-  String? note;
-  int? isCompleted;
-  String? date;
+  String? requester;
+  String? orderDate;
+  String? phoneNo;
+  String? address;
   String? startTime;
   String? endTime;
-  int? color;
-  int? remind;
-  String? repeat;
+  String? howToKnow;
+  String? userStatus;
+  String? serviceType;
 
-  OrderDataResponse(
+  TherapyOrderRequest(
       {this.id,
-      this.title,
-      this.note,
-      this.isCompleted,
-      this.date,
+      this.requester,
+      this.orderDate,
+      this.phoneNo,
+      this.address,
       this.startTime,
       this.endTime,
-      this.color,
-      this.remind,
-      this.repeat});
+      this.howToKnow,
+      this.userStatus,
+      this.serviceType});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'title': title,
-      'note': note,
-      'isCompleted': isCompleted,
-      'date': date,
+      'requester': requester,
+      'orderDate': orderDate,
+      'phoneNo': phoneNo,
+      'address': address,
       'startTime': startTime,
       'endTime': endTime,
-      'color': color,
-      'remind': remind,
-      'repeat': repeat,
+      'howToKnow': howToKnow,
+      'userStatus': userStatus,
+      'serviceType': serviceType,
     };
   }
 
-  factory OrderDataResponse.fromMap(Map<String, dynamic> map) {
-    return OrderDataResponse(
+  factory TherapyOrderRequest.fromMap(Map<String, dynamic> map) {
+    return TherapyOrderRequest(
       id: map['_id'],
-      title: map['title'],
-      note: map['note'],
-      isCompleted: map['isCompleted']?.toInt(),
-      date: map['date'],
+      requester: map['requester'],
+      orderDate: map['orderDate'],
+      phoneNo: map['phoneNo'],
+      address: map['address'],
       startTime: map['startTime'],
       endTime: map['endTime'],
-      color: map['color']?.toInt(),
-      remind: map['remind']?.toInt(),
-      repeat: map['repeat'],
+      howToKnow: map['howToKnow'],
+      userStatus: map['userStatus'],
+      serviceType: map['serviceType'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory OrderDataResponse.fromJson(String source) =>
-      OrderDataResponse.fromMap(json.decode(source));
+  factory TherapyOrderRequest.fromJson(String source) =>
+      TherapyOrderRequest.fromMap(json.decode(source));
 }

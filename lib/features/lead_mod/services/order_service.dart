@@ -10,14 +10,12 @@ class OrderService {
     headers: {'token': Config.token},
   );
 
-  Future<List<OrderDataResponse>?> getAll() async {
+  Future<List<TherapyOrderRequest>?> getAll() async {
     Response res = await _http.get(ApiEndpoint.events);
     if (res.statusCode == 200) {
       print("response data: " + res.toString());
-      List<OrderDataResponse> enquery = json
-          .decode(res.data)
-          .map((data) => OrderDataResponse.fromJson(data))
-          .toList();
+      List<TherapyOrderRequest> enquery =
+          json.decode(res.data).map((data) => TherapyOrderRequest.fromJson(data)).toList();
       return enquery;
     }
     return null;

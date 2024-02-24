@@ -4,7 +4,7 @@ import 'package:moon/core/theme.dart';
 import 'package:moon/features/lead_mod/models/order_get_models.dart';
 
 class TaskTile extends StatelessWidget {
-  final OrderDataResponse? task;
+  final TherapyOrderRequest? task;
   TaskTile(this.task);
 
   @override
@@ -16,8 +16,7 @@ class TaskTile extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: _getBGClr(task?.color ?? 0)),
+            borderRadius: BorderRadius.circular(16), color: _getBGClr(0)), // task?.color ?? 0)),
         child: Row(
           children: [
             Expanded(
@@ -25,12 +24,11 @@ class TaskTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  task?.title ?? "",
+                  // task?.title ?? "",
+                  "Title text",
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
+                          fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
                 SizedBox(
                   height: 12,
@@ -49,8 +47,7 @@ class TaskTile extends StatelessWidget {
                     Text(
                       "${task!.startTime} - ${task!.endTime}",
                       style: GoogleFonts.lato(
-                          textStyle:
-                              TextStyle(fontSize: 13, color: Colors.grey[100])),
+                          textStyle: TextStyle(fontSize: 13, color: Colors.grey[100])),
                     )
                   ],
                 ),
@@ -58,9 +55,9 @@ class TaskTile extends StatelessWidget {
                   height: 12,
                 ),
                 Text(
-                  task?.note ?? "",
-                  style: GoogleFonts.lato(
-                      textStyle: TextStyle(fontSize: 15, color: Colors.grey)),
+                  // task?.note ?? "",
+                  "Note text",
+                  style: GoogleFonts.lato(textStyle: TextStyle(fontSize: 15, color: Colors.grey)),
                 )
               ],
             )),
@@ -73,12 +70,11 @@ class TaskTile extends StatelessWidget {
             RotatedBox(
                 quarterTurns: 3,
                 child: Text(
-                  task!.isCompleted == 1 ? "COMPLETE" : "TODO",
+                  // task!.isCompleted == 1 ? "COMPLETE" : "TODO",
+                  "COMPLETED",
                   style: GoogleFonts.lato(
                       textStyle: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
+                          fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white)),
                 ))
           ],
         ),

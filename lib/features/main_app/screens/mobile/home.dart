@@ -152,15 +152,17 @@ class _HomeState extends State<Home> {
   }
 
   // Show popup at button.
-  _showBottomSheet(OrderDataResponse task) {
+  _showBottomSheet(TherapyOrderRequest task) {
     // Show button slide.
     showModalBottomSheet(
         context: context,
         builder: (context) => Container(
               padding: const EdgeInsets.only(top: 4),
-              height: task.isCompleted == 1
-                  ? MediaQuery.of(context).size.height * 0.24
-                  : MediaQuery.of(context).size.height * 0.32,
+              height:
+                  // task.isCompleted == 1
+                  //     ? MediaQuery.of(context).size.height * 0.24
+                  //     :
+                  MediaQuery.of(context).size.height * 0.32,
               // color: Get.isDarkMode ? darkGreyClr : Colors.white,
               child: Column(
                 children: [
@@ -172,20 +174,20 @@ class _HomeState extends State<Home> {
                         color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300]),
                   ),
                   Spacer(),
-                  task.isCompleted == 2
-                      ? Container()
-                      : _bottomSheetButton(
-                          label: "Task completed",
-                          onTap: () {
-                            print("Tab in Task completed.");
-                            Navigator.pop(context);
-                          },
-                          clr: primaryClr,
-                          context: context,
-                          isClose: true),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // task.isCompleted == 2
+                  //     ? Container()
+                  //     : _bottomSheetButton(
+                  //         label: "Task completed",
+                  //         onTap: () {
+                  //           print("Tab in Task completed.");
+                  //           Navigator.pop(context);
+                  //         },
+                  //         clr: primaryClr,
+                  //         context: context,
+                  //         isClose: true),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   _bottomSheetButton(
                       label: "Delete Task",
                       onTap: () {
