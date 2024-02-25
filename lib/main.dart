@@ -6,9 +6,6 @@ import 'config/config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initial DB
-  // await DBHelper.initDb();
-
   Provider.debugCheckInvalidValueType = null;
 
   // Load Environment file.
@@ -34,7 +31,7 @@ class CleanApp extends StatelessWidget {
       theme: MyTheme().lightTheme,
       darkTheme: MyTheme().darkTheme,
       themeMode: tm.themeMode,
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: Routes().routes,
     );
   }
