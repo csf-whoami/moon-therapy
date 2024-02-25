@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/core.dart';
+import 'package:moon/core/widgets/bottom_bar.dart';
 
 class HomeController extends StatelessWidget {
   const HomeController({Key? key}) : super(key: key);

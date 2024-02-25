@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/core.dart';
+import 'package:moon/core/widgets/bottom_bar.dart';
 
 class TherapyController extends StatelessWidget {
   const TherapyController({Key? key}) : super(key: key);

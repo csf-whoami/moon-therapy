@@ -5,11 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/architect.dart';
-import 'package:moon/core/core.dart';
 import 'package:moon/core/theme.dart';
 import 'package:moon/core/widgets/input_field.dart';
 import 'package:moon/features/main_app/providers/therapy_provider.dart';
-import 'package:moon/features/main_app/widgets/myButton.dart';
+import 'package:moon/features/main_app/widgets/widget.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
 // ignore: must_be_immutable
@@ -36,14 +35,11 @@ class _orderState extends State<Order> {
 
   // Request information
   final TextEditingController _orderDate = TextEditingController();
-  final TextEditingController _howToKnow = TextEditingController();
   final TextEditingController _userStatus = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
-
-  List<String> howToKnowList = ["Facebook", "Zalo", "Bạn bè giới thiệu"];
 
   int _selectedColor = 0;
   bool isLoading = false;
@@ -51,6 +47,9 @@ class _orderState extends State<Order> {
   late TextEditingController _controller;
   bool isExpanse = false;
 
+  // Nguồn thông tin
+  final List<String> howToKnowList = ["Facebook", "Zalo", "Bạn bè giới thiệu"];
+  late String _howToKnow = howToKnowList[0];
   // Xác định ngày điều trị
   final List<String> options = ["Active", "NotActive"];
   late String currentOption = options[0];
@@ -370,7 +369,7 @@ class _orderState extends State<Order> {
                       ),
                       MyInputField(
                         title: "Biết được dịch vụ từ đâu?",
-                        hint: "minutes early.",
+                        hint: _howToKnow,
                         widget: DropdownButton(
                           icon: Icon(
                             Icons.keyboard_arrow_down,
@@ -387,12 +386,10 @@ class _orderState extends State<Order> {
                           }).toList(),
                           onChanged: (String? val) {
                             setState(() {
-                              // _selectedRemind = int.parse(val!);
-                              print(val);
+                              _howToKnow = val!;
                             });
                           },
                         ),
-                        controller: _howToKnow,
                       ),
                       SizedBox(
                         width: 16,
@@ -580,29 +577,20 @@ class _orderState extends State<Order> {
   }
 
   _addTaskToDB() async {
+    var data = TherapyOrderRequest(
+      id: null,
+      requester: _requester,
+      orderDate: _orderDate.text,
+      phoneNo: _phoneNo.text,
+      address: _address.text,
+      startTime: _startTime,
+      endTime: _endTime,
+      howToKnow: _howToKnow,
+      userStatus: _userStatus.text,
+      serviceType: _service,
+    );
     // Set data to database.
-    // var value = await _orderProvider.addOrder(
-    //     request: TherapyOrderRequest(
-    //       id: null,
-    //         requester:_requester,
-    //         orderDate:_or
-    //         String? phoneNo;
-    //     String? address;
-    //     startTime:
-    //         String? endTime;
-    //         String? howToKnow;
-    //         String? userStatus;
-    //     String? serviceType;
-    //
-    //         note: _noteController!.text,
-    //         title: _titleController!.text,
-    //         date: DateFormat.yMd().format(_selectedDate),
-    //         startTime: _startTime,
-    //         endTime: _endTime,
-    //         remind: _selectedRemind,
-    //         repeat: _selectedRepeat,
-    //         color: _selectedColor,
-    //         isCompleted: 0));
-    print("My ID");
+    var value = await _orderProvider.addOrder(request: data);
+    print("My value $data");
   }
 }

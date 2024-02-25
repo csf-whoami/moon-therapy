@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../core/core.dart';
+import 'package:moon/features/main_app/widgets/bottom_bar.dart';
 
 // ignore: must_be_immutable
 class BottomTabBar extends BottomBar {

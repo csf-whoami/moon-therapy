@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:moon/features/main_app/widgets/widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/core.dart';
@@ -15,8 +16,7 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
-  final TextEditingController _controller =
-      TextEditingController(text: 'Software Development');
+  final TextEditingController _controller = TextEditingController(text: 'Software Development');
 
   @override
   void initState() {
