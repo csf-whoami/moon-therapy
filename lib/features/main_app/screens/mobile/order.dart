@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:moon/architect.dart';
 import 'package:moon/core/core.dart';
@@ -24,6 +25,7 @@ class Order extends StatefulWidget {
 class _orderState extends State<Order> {
   final OrderProvider _orderProvider = OrderProvider();
 
+  // User information.
   late String _requester;
   final TextEditingController _fullName = TextEditingController();
   final TextEditingController _phoneNo = TextEditingController();
@@ -32,14 +34,16 @@ class _orderState extends State<Order> {
   final TextEditingController _height = TextEditingController();
   final TextEditingController _weight = TextEditingController();
 
+  // Request information
+  final TextEditingController _orderDate = TextEditingController();
+  final TextEditingController _howToKnow = TextEditingController();
+  final TextEditingController _userStatus = TextEditingController();
+
   DateTime _selectedDate = DateTime.now();
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
 
-  List<int> remindList = [5, 10, 15, 20];
-
-  String _selectedRepeat = "None";
-  List<String> repeatList = ["None", "Daily", "Weekly", "Monthly"];
+  List<String> howToKnowList = ["Facebook", "Zalo", "Bạn bè giới thiệu"];
 
   int _selectedColor = 0;
   bool isLoading = false;
@@ -47,8 +51,12 @@ class _orderState extends State<Order> {
   late TextEditingController _controller;
   bool isExpanse = false;
 
+  // Xác định ngày điều trị
   final List<String> options = ["Active", "NotActive"];
   late String currentOption = options[0];
+  // Dịch vụ trị liệu
+  final List<String> services = ["Home", "Moon-office"];
+  late String _service = services[0];
 
   Future fetchAutoCompleteData() async {
     setState(() {
@@ -354,11 +362,75 @@ class _orderState extends State<Order> {
                                 title: "Ngày dự kiến",
                                 hint:
                                     "khoảng thời gian nào đó trong tuần? Hoặc là trong khoảng thời gian từ ngày nào đến ngày nào? ...",
-                                controller: _fullName,
+                                controller: _orderDate,
                               ),
                             ),
                       SizedBox(
                         height: 18,
+                      ),
+                      MyInputField(
+                        title: "Biết được dịch vụ từ đâu?",
+                        hint: "minutes early.",
+                        widget: DropdownButton(
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.grey,
+                          ),
+                          iconSize: 32,
+                          elevation: 4,
+                          style: subTitleStyle,
+                          underline: Container(
+                            height: 0,
+                          ),
+                          items: howToKnowList.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(value: value, child: Text(value));
+                          }).toList(),
+                          onChanged: (String? val) {
+                            setState(() {
+                              // _selectedRemind = int.parse(val!);
+                              print(val);
+                            });
+                          },
+                        ),
+                        controller: _howToKnow,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ListTile(
+                              title: const Text("Làm tại trung tâm"),
+                              leading: Radio(
+                                value: services[0],
+                                groupValue: _service,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _service = value.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          Expanded(
+                            child: ListTile(
+                              title: const Text("Làm tại nhà"),
+                              leading: Radio(
+                                value: services[1],
+                                groupValue: _service,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _service = value.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,6 +439,7 @@ class _orderState extends State<Order> {
                             maxLines: 10, //or null
                             decoration:
                                 InputDecoration.collapsed(hintText: "Tình trạng của khách hàng..."),
+                            controller: _userStatus,
                           ),
                         ],
                       ),
@@ -385,7 +458,7 @@ class _orderState extends State<Order> {
                     onPressed: () {
                       _validateDate();
                     },
-                    label: 'Login Now',
+                    label: 'Đăng ký',
                     stretch: true,
                   )
                 ],
@@ -404,16 +477,15 @@ class _orderState extends State<Order> {
 
   // TODO: Validate data.
   _validateDate() {
-    // if (_titleController!.text.isNotEmpty && _noteController!.text.isNotEmpty) {
-    //   print('Tap in here. And insert to DB');
-    //   // Add to database.
-    _addTaskToDB();
-    // } else if (_titleController!.text.isEmpty || _noteController!.text.isEmpty) {
-    //   Get.snackbar("Required", "All fields are required!!",
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       backgroundColor: Colors.white,
-    //       icon: Icon(Icons.warning_amber_rounded));
-    // }
+    if (_fullName!.text.isNotEmpty && _phoneNo!.text.isNotEmpty && _address!.text.isNotEmpty) {
+      // Add to database.
+      _addTaskToDB();
+    } else if (_fullName!.text.isEmpty || _phoneNo!.text.isEmpty || _address!.text.isEmpty) {
+      Get.snackbar("Required", "All fields are required!!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+          icon: Icon(Icons.warning_amber_rounded));
+    }
   }
 
   // Date picker
